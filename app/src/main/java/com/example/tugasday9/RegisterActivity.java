@@ -36,15 +36,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             moveToLogin();
         } else if (v.getId() == R.id.btn) {
             String username = binding.username.getText().toString();
-            String name = binding.nama.getText().toString();
             String password = binding.password.getText().toString();
-            register(username, name, password);
+            String name = binding.nama.getText().toString();
+            register(username, password, name);
         }
     }
 
-    private void register(String username, String name, String password) {
+    private void register(String username, String password, String name) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Register> call = apiInterface.RegisterResponse(username, name, password);
+        Call<Register> call = apiInterface.RegisterResponse(username, password, name);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
